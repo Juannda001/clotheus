@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClotheUs - Tienda</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-leaf"></i>
+                    <span>ClotheUs</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+                <a href="#tienda" class="nav-link">
+                    <i class="fas fa-store"></i>
+                    Tienda
+                </a>
+                <a href="#sostenible" class="nav-link">
+                    <i class="fas fa-recycle"></i>
+                    Sostenible
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="user-menu">
+                    <i class="fas fa-user"></i>
+                    <span>Cliente</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section Simplificada -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Viste con Propósito</h1>
+            <p>Descubre prendas únicas con estilo mientras cuidas del planeta</p>
+            
+            <!-- Botón único que activa la búsqueda -->
+            <div class="hero-main-action">
+                <button class="btn btn-primary btn-hero-main" onclick="activateSearch()">
+                    <i class="fas fa-search"></i>
+                    Explorar Colección
+                </button>
+            </div>
+
+            <!-- Barra de búsqueda (inicialmente oculta) -->
+            <div class="search-container" id="searchContainer" style="display: none;">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar prendas, estilos, marcas...">
+                    <button class="btn btn-primary" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                        Buscar
+                    </button>
+                </div>
+                
+                <!-- Etiquetas de recomendación -->
+                <div class="search-tags">
+                    <span class="search-tag" onclick="searchByTag('vintage')">#Vintage</span>
+                    <span class="search-tag" onclick="searchByTag('sostenible')">#Sostenible</span>
+                    <span class="search-tag" onclick="searchByTag('urbano')">#Urbano</span>
+                    <span class="search-tag" onclick="searchByTag('formal')">#Formal</span>
+                    <span class="search-tag" onclick="searchByTag('algodón')">#AlgodónOrgánico</span>
+                    <span class="search-tag" onclick="searchByTag('denim')">#DenimReciclado</span>
+                    <span class="search-tag" onclick="searchByTag('casual')">#Casual</span>
+                    <span class="search-tag" onclick="searchByTag('deportivo')">#Deportivo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros por Estilo -->
+    <section class="filters-section">
+        <div class="container">
+            <h2 class="section-subtitle">Encuentra tu estilo perfecto</h2>
+            <div class="filters-grid">
+                <div class="filter-category">
+                    <h3><i class="fas fa-tags"></i> Categorías</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="todos">
+                            <i class="fas fa-th-large"></i>
+                            Todas
+                        </button>
+                        <button class="filter-btn" data-filter="camisas">
+                            <i class="fas fa-tshirt"></i>
+                            Camisas
+                        </button>
+                        <button class="filter-btn" data-filter="blusas">
+                            <i class="fas fa-female"></i>
+                            Blusas
+                        </button>
+                        <button class="filter-btn" data-filter="pantalones">
+                            <i class="fas fa-vest"></i>
+                            Pantalones
+                        </button>
+                        <button class="filter-btn" data-filter="faldas">
+                            <i class="fas fa-skirt"></i>
+                            Faldas
+                        </button>
+                        <button class="filter-btn" data-filter="vestidos">
+                            <i class="fas fa-dress"></i>
+                            Vestidos
+                        </button>
+                        <button class="filter-btn" data-filter="chaquetas">
+                            <i class="fas fa-jacket"></i>
+                            Chaquetas
+                        </button>
+                        <button class="filter-btn" data-filter="sudaderas">
+                            <i class="fas fa-hoodie"></i>
+                            Sudaderas
+                        </button>
+                        <button class="filter-btn" data-filter="accesorios">
+                            <i class="fas fa-gem"></i>
+                            Accesorios
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="filter-category">
+                    <h3><i class="fas fa-palette"></i> Estilos</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-style="todos">Todos</button>
+                        <button class="filter-btn" data-style="vintage">Vintage</button>
+                        <button class="filter-btn" data-style="urbano">Urbano</button>
+                        <button class="filter-btn" data-style="casual">Casual</button>
+                        <button class="filter-btn" data-style="elegante">Elegante</button>
+                        <button class="filter-btn" data-style="bohemio">Bohemio</button>
+                        <button class="filter-btn" data-style="deportivo">Deportivo</button>
+                        <button class="filter-btn" data-style="minimalista">Minimalista</button>
+                    </div>
+                </div>
+                
+                <div class="filter-category">
+                    <h3><i class="fas fa-filter"></i> Filtros Avanzados</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn" data-price="0-50">$0 - $50</button>
+                        <button class="filter-btn" data-price="50-100">$50 - $100</button>
+                        <button class="filter-btn" data-price="100+">$100+</button>
+                        <button class="filter-btn" data-condition="excelente">Excelente Estado</button>
+                        <button class="filter-btn" data-condition="nuevo">Como Nuevo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistema de Ordenamiento -->
+    <section class="sorting-section">
+        <div class="sorting-container">
+            <div class="sorting-info" id="productCount">Cargando productos...</div>
+            <div class="sorting-controls">
+                <label for="sortSelect">Ordenar por:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="nombre">Nombre A-Z</option>
+                    <option value="precio-asc">Precio: Menor a Mayor</option>
+                    <option value="precio-desc">Precio: Mayor a Menor</option>
+                    <option value="recientes">Más Recientes</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Grid -->
+    <section id="tienda" class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Prendas Destacadas</h2>
+                <p>Descubre nuestra selección de ropa de segunda mano en perfecto estado</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Impacto Ambiental -->
+    <section id="sostenible" class="impact-section">
+        <div class="container">
+            <div class="impact-content">
+                <div class="impact-text">
+                    <h2>Tu Compra Hace la Diferencia</h2>
+                    <p>Cada prenda que eliges ayuda a reducir el desperdicio textil y promover la moda circular</p>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <i class="fas fa-tshirt"></i>
+                            <div>
+                                <h3>1,247</h3>
+                                <p>Prendas Recicladas</p>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <i class="fas fa-tree"></i>
+                            <div>
+                                <h3>856kg</h3>
+                                <p>CO₂ Ahorrados</p>
+                            </div>
+                        </div>
+                        <div class="impact-stat">
+                            <i class="fas fa-tint"></i>
+                            <div>
+                                <h3>24,500L</h3>
+                                <p>Agua Conservada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-leaf"></i>
+                        <span>ClotheUs</span>
+                    </div>
+                    <p>Promoviendo la moda sostenible a través de la reutilización consciente de prendas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <a href="#tienda">Tienda</a>
+                    <a href="#sostenible">Sostenible</a>
+                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Contacto</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-envelope"></i> clotheus@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +57 (319) 205-7872</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bogotá</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ClotheUs. Moda Consciente, Planeta Feliz.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carrito Lateral -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Tu Carrito</h3>
+            <button class="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Tu carrito está vacío</p>
+                <span>Agrega algunos productos sostenibles</span>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">
+                <i class="fas fa-credit-card"></i>
+                Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <script src="/js/cliente.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "clotheus",
+  "version": "1.0.0",
+  "description": "Tienda virtual de ropa de segunda mano",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ropa",
+    "segunda mano",
+    "moda",
+    "sostenible"
+  ],
+  "author": "Davis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

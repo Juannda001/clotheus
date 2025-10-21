@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClotheUs - Panel Vendedor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-leaf"></i>
+                    <span>ClotheUs</span>
+                </a>
+                <span class="role-badge">Vendedor</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-link active" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+                <a href="#productos" class="nav-link" onclick="showSection('productos')">
+                    <i class="fas fa-tshirt"></i>
+                    Mis Productos
+                </a>
+                <a href="#publicar" class="nav-link" onclick="showSection('publicar')">
+                    <i class="fas fa-plus-circle"></i>
+                    Publicar Producto
+                </a>
+                <a href="#estadisticas" class="nav-link" onclick="showSection('estadisticas')">
+                    <i class="fas fa-chart-bar"></i>
+                    Estadísticas
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="viewSales()" title="Ver ventas">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="salesCount">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="seller-main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="seller-section active">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Dashboard del Vendedor</h1>
+                    <p>Gestiona tu inventario y monitorea tu progreso</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>Productos Publicados</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalViews">1,247</h3>
+                            <p>Visitas Totales</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalSales">28</h3>
+                            <p>Ventas Realizadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="avgRating">4.8</h3>
+                            <p>Rating Promedio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Acciones Rápidas</h2>
+                    <div class="actions-grid">
+                        <!-- SOLO mantener estas 2 acciones esenciales -->
+                        <button class="action-card" onclick="showSection('publicar')">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Publicar Producto</span>
+                        </button>
+                        <button class="action-card" onclick="showSection('productos')">
+                            <i class="fas fa-edit"></i>
+                            <span>Gestionar Productos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Actividad Reciente</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <i class="fas fa-shopping-bag activity-icon success"></i>
+                            <div class="activity-content">
+                                <p><strong>Venta realizada</strong> - Camiseta Vintage</p>
+                                <span class="activity-time">Hace 2 horas</span>
+                            </div>
+                            <span class="activity-amount">+$22.99</span>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-eye activity-icon info"></i>
+                            <div class="activity-content">
+                                <p><strong>Producto visto</strong> - Jeans Slim Fit</p>
+                                <span class="activity-time">Hace 5 horas</span>
+                            </div>
+                            <span class="activity-views">15 vistas</span>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-plus-circle activity-icon primary"></i>
+                            <div class="activity-content">
+                                <p><strong>Producto publicado</strong> - Bufanda de Lana</p>
+                                <span class="activity-time">Ayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mis Productos Section -->
+        <section id="productos" class="seller-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Mis Productos</h1>
+                    <p>Gestiona tu inventario de productos publicados</p>
+                </div>
+
+                <div class="products-actions">
+                    <div class="search-products">
+                        <input type="text" id="searchSellerProducts" placeholder="Buscar en mis productos...">
+                        <button class="btn btn-primary" onclick="searchSellerProducts()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <!-- SOLO queda la barra de búsqueda - botón eliminado -->
+                </div>
+
+                <div class="seller-products-grid" id="sellerProductsGrid">
+                    <!-- Los productos del vendedor se cargarán aquí -->
+                    <div class="empty-state">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>Aún no tienes productos publicados</h3>
+                        <p>Comienza agregando tu primera prenda sostenible</p>
+                        <button class="btn btn-primary btn-center-icon" onclick="showSection('publicar')">
+                            <i class="fas fa-plus-circle"></i>
+                            Publicar Primer Producto
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Publicar Producto Section -->
+        <section id="publicar" class="seller-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Publicar Nuevo Producto</h1>
+                    <p>Comparte prendas únicas con la comunidad sostenible</p>
+                </div>
+
+                <div class="form-container">
+                    <form id="productForm" class="product-form">
+                        <div class="form-grid">
+                            <!-- Información Básica -->
+                            <div class="form-section">
+                                <h3><i class="fas fa-info-circle"></i> Información Básica</h3>
+                                
+                                <div class="form-group">
+                                    <label for="productName">Nombre del Producto *</label>
+                                    <input type="text" id="productName" required 
+                                           placeholder="Ej: Camiseta Vintage de Algodón Orgánico">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="productDescription">Descripción *</label>
+                                    <textarea id="productDescription" rows="4" required
+                                              placeholder="Describe tu producto, incluye detalles sobre materiales, condición y características especiales..."></textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="productPrice">Precio ($) *</label>
+                                        <input type="number" id="productPrice" min="0" step="0.01" required
+                                               placeholder="0.00">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="productCategory">Categoría *</label>
+                                        <select id="productCategory" required>
+                                            <option value="">Selecciona una categoría</option>
+                                            <option value="camisas">Camisas</option>
+                                            <option value="blusas">Blusas</option>
+                                            <option value="pantalones">Pantalones</option>
+                                            <option value="faldas">Faldas</option>
+                                            <option value="vestidos">Vestidos</option>
+                                            <option value="chaquetas">Chaquetas</option>
+                                            <option value="sudaderas">Sudaderas</option>
+                                            <option value="accesorios">Accesorios</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detalles del Producto -->
+                            <div class="form-section">
+                                <h3><i class="fas fa-sliders-h"></i> Detalles Específicos</h3>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="productStyle">Estilo *</label>
+                                        <select id="productStyle" required>
+                                            <option value="">Selecciona un estilo</option>
+                                            <option value="vintage">Vintage</option>
+                                            <option value="urbano">Urbano</option>
+                                            <option value="formal">Formal</option>
+                                            <option value="casual">Casual</option>
+                                            <option value="deportivo">Deportivo</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="productCondition">Estado *</label>
+                                        <select id="productCondition" required>
+                                            <option value="">Condición del producto</option>
+                                            <option value="Excelente">Excelente - Como nuevo</option>
+                                            <option value="Como nuevo">Como nuevo - Muy poco uso</option>
+                                            <option value="Buen estado">Buen estado - Signos mínimos de uso</option>
+                                            <option value="Poco uso">Poco uso - Algunos signos de uso</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="productSize">Talla *</label>
+                                        <select id="productSize" required>
+                                            <option value="">Selecciona talla</option>
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="Única">Única</option>
+                                            <option value="Ajustable">Ajustable</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="productColor">Color *</label>
+                                        <input type="text" id="productColor" required
+                                               placeholder="Ej: Azul, Negro, Multicolor...">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="productBrand">Marca</label>
+                                        <input type="text" id="productBrand"
+                                               placeholder="Ej: Sustainable Wear, Eco Denim...">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="productMaterial">Material *</label>
+                                        <input type="text" id="productMaterial" required
+                                               placeholder="Ej: Algodón Orgánico, Mezclilla Reciclada...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Imágenes -->
+                            <div class="form-section">
+                                <h3><i class="fas fa-images"></i> Imágenes del Producto</h3>
+                                
+                                <div class="form-group">
+                                    <label for="productImage">URL de la Imagen *</label>
+                                    <input type="url" id="productImage" required
+                                           placeholder="https://ejemplo.com/imagen-producto.jpg">
+                                    <small class="form-help">Usa enlaces de imágenes de Unsplash o similar</small>
+                                </div>
+
+                                <div class="image-preview" id="imagePreview">
+                                    <div class="preview-placeholder">
+                                        <i class="fas fa-image"></i>
+                                        <p>Vista previa de la imagen aparecerá aquí</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                <i class="fas fa-redo"></i>
+                                Limpiar Formulario
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Publicar Producto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estadísticas Section -->
+        <section id="estadisticas" class="seller-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Estadísticas y Reportes</h1>
+                    <p>Analiza el rendimiento de tus productos y ventas</p>
+                </div>
+
+                <div class="stats-container">
+                    <div class="chart-section">
+                        <h3>Ventas por Mes</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Gráfico de ventas mensuales</p>
+                            <small>Esta funcionalidad estará disponible pronto</small>
+                        </div>
+                    </div>
+
+                    <div class="stats-cards">
+                        <div class="stat-card-lg">
+                            <h4>Productos Más Populares</h4>
+                            <div class="popular-products">
+                                <div class="popular-product">
+                                    <span class="product-rank">1</span>
+                                    <div class="product-info">
+                                        <strong>Camiseta Vintage</strong>
+                                        <span>28 ventas</span>
+                                    </div>
+                                </div>
+                                <div class="popular-product">
+                                    <span class="product-rank">2</span>
+                                    <div class="product-info">
+                                        <strong>Jeans Slim Fit</strong>
+                                        <span>19 ventas</span>
+                                    </div>
+                                </div>
+                                <div class="popular-product">
+                                    <span class="product-rank">3</span>
+                                    <div class="product-info">
+                                        <strong>Bufanda de Lana</strong>
+                                        <span>15 ventas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card-lg">
+                            <h4>Rendimiento por Categoría</h4>
+                            <div class="category-stats">
+                                <div class="category-stat">
+                                    <span class="category-name">Camisas</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 70%"></div>
+                                    </div>
+                                    <span class="stat-value">70%</span>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Pantalones</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 50%"></div>
+                                    </div>
+                                    <span class="stat-value">50%</span>
+                                </div>
+                                <div class="category-stat">
+                                    <span class="category-name">Accesorios</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-progress" style="width: 30%"></div>
+                                    </div>
+                                    <span class="stat-value">30%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Edición -->
+    <div id="editModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Editar Producto</h2>
+                <button class="close-modal" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <!-- El formulario de edición se carga aquí dinámicamente -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Acción</h2>
+                <button class="close-modal" onclick="closeConfirmModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Estás seguro de que quieres realizar esta acción?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeConfirmModal()">Cancelar</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/vendedor.js"></script>
+</body>
+</html>
+
